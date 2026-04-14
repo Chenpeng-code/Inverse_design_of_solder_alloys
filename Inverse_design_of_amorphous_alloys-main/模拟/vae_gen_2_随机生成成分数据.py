@@ -29,8 +29,8 @@ class Encoder(nn.Module):
         self.linear3 = nn.Linear(32, latent_dims)
 
         self.N = torch.distributions.Normal(0, 1)
-        self.register_buffer('loc_buffer', torch.tensor(0.0))  # 注册为缓冲区
-        self.register_buffer('scale_buffer', torch.tensor(1.0))
+        self.N.loc = self.N.loc# hack to get sampling on the GPU
+        self.N.scale = self.N.scale
         self.kl = 0
 
 
@@ -41,7 +41,6 @@ class Encoder(nn.Module):
 
         mu =  self.linear2(x)
         sigma = torch.exp(self.linear3(x))
-        N = torch.distributions.Normal(self.loc_buffer, self.scale_buffer)
         z = mu + sigma*self.N.sample(mu.shape)
 
         self.kl =1/2 * (sigma + mu**2 - torch.log(sigma) - 1).sum()
