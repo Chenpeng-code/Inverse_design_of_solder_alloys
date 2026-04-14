@@ -1,8 +1,4 @@
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'  # 明确告知系统无可用GPU
-os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:False'
-os.environ['PYTORCH_NO_CUDA_MEMORY_CACHING'] = '1'
-os.environ['PYTORCH_JIT'] = '0'  # 禁用JIT编译，减少CUDA相关调用
 import re
 import streamlit as st
 import numpy as np
