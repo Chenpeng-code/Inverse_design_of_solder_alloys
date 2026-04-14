@@ -11,7 +11,7 @@ from vae_gen_4_机器学习模型排序 import ML_sort
 from vae_gen_5_将排序后的成分转化为化学式 import Expression_formula
 import matplotlib
 
-matplotlib.use('tkagg')
+matplotlib.use('agg')
 
 # 获取当前脚本文件的绝对路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
