@@ -29,8 +29,8 @@ class Encoder(nn.Module):
         self.linear3 = nn.Linear(32, latent_dims)
 
         self.N = torch.distributions.Normal(0, 1)
-        self.N.loc = self.N.loc.cuda() # hack to get sampling on the GPU
-        self.N.scale = self.N.scale.cuda()
+        self.N.loc = self.N.loc # hack to get sampling on the GPU
+        self.N.scale = self.N.scale
         self.kl = 0
 
 
