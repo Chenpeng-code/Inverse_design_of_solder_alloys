@@ -1,4 +1,5 @@
 # safe_app.py
+import asyncio
 import os
 import sys
 
@@ -7,7 +8,17 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:False'
 os.environ['PYTORCH_NO_CUDA_MEMORY_CACHING'] = '1'
 os.environ['PYTORCH_JIT'] = '0'
+# 新增：禁用Streamlit文件监控和XSRF保护
+os.environ["STREAMLIT_SERVER_WATCH_MODULES"] = "false"
+os.environ["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false"
+os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
+os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
 
+# 设置事件循环策略（解决asyncio问题）
+if sys.platform.startswith('win'):
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+else:
+    asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
 # 2. 设置 Python 路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
 simulate_dir = os.path.join(script_dir, '模拟')
