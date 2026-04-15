@@ -119,7 +119,7 @@ def normalize_top_n_values(tensor, n, threshold=0.001):
 
 def normalize_filter(tensor, threshold=0.001):
     # Apply thresholding
-    threshold_tensor = torch.tensor(threshold, device=tensor.device)
+    threshold_tensor = torch.tensor(threshold, device=tensor.device)/100
     tensor = torch.where(tensor < threshold_tensor, torch.tensor(0.0, device=tensor.device), tensor)
 
     non_zero = []
