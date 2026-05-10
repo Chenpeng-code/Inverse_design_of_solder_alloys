@@ -45,7 +45,7 @@ def Generated_Attribute(num, Re_ts, Re_tl, Re_σb):
     df_filter = attribute_df[(attribute_df['TS'].between(Re_ts*0.1, np.inf)) &
                              ((attribute_df['TL']).between(Re_tl*0.1, np.inf)) &
                              ((attribute_df['σb']).between( Re_σb*0.5, np.inf)) &
-                             ((attribute_df['Re_attribute_mse']).between(0, 0.003))
+                             ((attribute_df['Re_attribute_mse']).between(0, 0.03))
                              ]
 
     df_filter.iloc[:, 0] = df_filter.iloc[:, 0] * 10
@@ -73,7 +73,7 @@ def Generated_Component(TS, TL, σb, Gen_num, Keep_num, Voxel_size):
     re_attribute_data = p_vae(attribute_data.float())
     re_attribute_rate = ((attribute_data - re_attribute_data) ** 2).sum()
 
-    if re_attribute_rate < 0.003:
+    if re_attribute_rate < 0.03:
 
         sample = torch.normal(0, 1, (Gen_num, 3))
         tensor_repeated = re_attribute_data.repeat(Gen_num, 1)
