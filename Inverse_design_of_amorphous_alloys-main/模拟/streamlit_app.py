@@ -45,8 +45,7 @@ def Generated_Attribute(num, Re_ts, Re_tl, Re_σb):
     df_filter = attribute_df[(attribute_df['TS'].between(Re_ts*0.1, np.inf)) &
                              ((attribute_df['TL']).between(Re_tl*0.1, np.inf)) &
                              ((attribute_df['σb']).between( Re_σb*0.5, np.inf)) &
-                             ((attribute_df['Re_attribute_mse']).between(0, 0.03))
-                             ]
+                             ((attribute_df['Re_attribute_mse']).between(0, 0.03))]
 
     df_filter.iloc[:, 0] = df_filter.iloc[:, 0] * 10
     df_filter.iloc[:, 1] = df_filter.iloc[:, 1] * 10
